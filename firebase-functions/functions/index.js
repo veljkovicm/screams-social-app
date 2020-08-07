@@ -1,16 +1,17 @@
+const config = require('./firebase-api');
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
+const app = require('express')();
 
 const serviceAccount = require('./admin.json');
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL: "https://screams-social-app.firebaseio.com"
+  databaseURL: "https://screams-social-app.firebaseio.com",
 });
 
-const express = require('express');
-
-const app = express();
+const firebase = require('firebase');
+firebase.initializeApp(config);
 
 app.get('/screams', (req, res) => {
   admin
@@ -53,5 +54,25 @@ app.post('/scream', (req, res) => {
     });
 });
 
+// Signup route
+app.post('/signup', (req, res) => {
+  const newUser = {
+    email: req.body.email,
+    password: req.body.password,
+    confirmPassword: req.body.confirmPassword,
+    handle: req.body.handle,
+  };
 
-exports.api = functions.region('europe-west1').https.onRequest(app);
+  // TODO valdiate data
+
+  firebase.auth().createUserWithEmailAndPassword(newUser.email, newUser.password)
+    .then(data => {
+      return res.status(201).json({ message: `user ${data.user.uid} signed up successfully`});
+    })
+    .catch(err => {
+      console.error(err);
+      return res.status(500).json({ error: err.code, message: err.message });
+    })
+});
+
+exports.api = functions.https.onRequest(app);
