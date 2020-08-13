@@ -20,6 +20,14 @@ let db = {
       commentCount: 2
     }
   ],
+  comments: [
+    {
+      userHandle: 'user',
+      screamId: '345tsdfg566455n6j564',
+      body: 'Noice!',
+      createdAt: '2020-08-07T07:47:47.105Z',
+    }
+  ]
 };
 const userDetails = {
   // Redux data
