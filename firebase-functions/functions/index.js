@@ -23,6 +23,7 @@ const {
   addUserDetails,
   getAuthenticatedUser,
   getUserDetails,
+  markNotificationsRead,
 } = require('./handlers/users');
 
 // Scream routes
@@ -41,6 +42,7 @@ app.post('/user/image', FBAuth, uploadImage);
 app.post('/user', FBAuth, addUserDetails);
 app.get('/user', FBAuth, getAuthenticatedUser);
 app.get('/user/:handle', getUserDetails);
+app.post('/notifications/', FBAuth, markNotificationsRead);
 
 
 
