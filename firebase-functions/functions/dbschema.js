@@ -20,6 +20,16 @@ let db = {
       commentCount: 2
     }
   ],
+  notifications: [
+    {
+      recipient: 'user',
+      sender: 'john',
+      read: 'true | false',
+      screamId: '345tsdfg566455n6j564',
+      type: 'like | comment',
+      createdAt: '2020-08-07T07:47:47.105Z',
+    }
+  ],
   comments: [
     {
       userHandle: 'user',
