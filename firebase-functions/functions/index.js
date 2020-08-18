@@ -52,11 +52,8 @@ exports.deleteNotificationOnUnlike = functions
   .region('europe-west1')
   .firestore.document('likes/{id}')
   .onDelete((snapshot) => {
-    db.doc(`/notifications/${snapshot.id}`)
+    return db.doc(`/notifications/${snapshot.id}`)
       .delete()
-      .then(() => {
-        return;
-      })
       .catch(err => {
         console.error(err)
         return;
@@ -67,9 +64,9 @@ exports.createNotificationOnLike = functions.
   region('europe-west1')
   .firestore.document('likes/{id}')
   .onCreate((snapshot) => {
-    db.doc(`/screams/${snapshot.data().screamId}`).get()
+    return db.doc(`/screams/${snapshot.data().screamId}`).get()
       .then(doc => {
-        if(doc.exists) {
+        if(doc.exists && doc.data().userHandle !== snapshot.data().userHandle) {
           return db.doc(`/notifications/${snapshot.id}`).set({
             createdAt: new Date(),
             recipient: doc.data().userHandle,
@@ -80,34 +77,25 @@ exports.createNotificationOnLike = functions.
           })
         }
       })
-      .then(() => {
-        return
-      })
-      .catch(err => {
-        console.error(err);
-        return;
-      });
+      .catch(err => console.error(err));
   });
 
 exports.createNotificationOnComment = functions
   .region('europe-west1')
   .firestore.document('comments/{id}')
   .onCreate((snapshot) => {
-    db.doc(`/screams/${snapshot.data().screamId}`).get()
+    return db.doc(`/screams/${snapshot.data().screamId}`).get()
       .then(doc => {
-        if(doc.exists) {
+        if(doc.exists && doc.data().userHandle !== snapshot.data().userHandle) {
           return db.doc(`/notifications/${snapshot.id}`).set({
             createdAt: new Date(),
             recipient: doc.data().userHandle,
             sender: snapshot.data().userHandle,
             type: 'comment',
             read: false,
-            screamId: doc.id
+            screamId: doc.id,
           })
         }
-      })
-      .then(() => {
-        return
       })
       .catch(err => {
         console.error(err);
@@ -120,8 +108,8 @@ exports.onUserImageChange = functions
   .firestore.document('/users/{userId}')
   .onUpdate((change) => {
     if(change.before.data().imageUrl !== change.after.data().imageUrl) {
-      let batch = db.batch();
-      return db.collection('screams').where('userHandle', '==', change.beforedata().handle).get()
+      const batch = db.batch();
+      return db.collection('screams').where('userHandle', '==', change.before.data().handle).get()
         .then((data) => {
           data.forEach(doc => {
             const scream = db.doc(`/screams/${doc.id}`);
@@ -129,6 +117,8 @@ exports.onUserImageChange = functions
           })
           return batch.commit();
         })
+    } else {
+      return true;
     }
   })
 
