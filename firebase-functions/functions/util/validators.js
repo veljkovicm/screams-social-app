@@ -51,10 +51,6 @@ exports.validateLoginData = (data) => {
     errors.password = 'Must not be empty';
   }
 
-  if(Object.keys(errors).length > 0) {
-    return res.status(400).json(errors);
-  };
-
   return {
     errors,
     valid: Object.keys(errors).length === 0 ? true : false,
