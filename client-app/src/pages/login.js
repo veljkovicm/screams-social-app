@@ -12,41 +12,10 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress'
 
-const styles = {
-  form: {
-    textAlign: 'center',
-  },
-  image: {
-    margin: '20px auto',
-    maxWidth: '64px',
-  },
-  textField: {
-    margin: '5px 0'
-  },
-  button: {
-    marginTop: 20,
-    position: 'relative',
-  },
-  progress: {
-    position: 'absolute',
 
-  },
-  customError: {
-    color: 'red',
-    fontSize: '0.8rem',
-    marginTop: 10,
-  },
-  signupNotice: {
-    display: 'block',
-    marginTop: 20,
-    color: '#124543'
-  },
-  signupLink: {
-    color: '#124543',
-    textDecoration: 'underline',
-  },
-}
-
+const styles = (theme) => ({
+  ...theme.styles
+});
 
 
 class Login extends Component {
@@ -71,6 +40,7 @@ class Login extends Component {
     axios.post('/login', userData)
       .then(res => {
         console.log(res.data);
+        localStorage.setItem('FBIdToken', `Bearer ${res.data.token}`);
         this.setState({
           loading: false,
         });
@@ -146,7 +116,7 @@ class Login extends Component {
                 <CircularProgress size={30} className={classes.progress} />
               )}
             </Button>
-            <small className={classes.signupNotice}>Don't have an accound? Sign up <Link to="/signup" className={classes.signupLink}>here</Link></small>
+            <small className={classes.signupNotice}>Don't have an account? Sign up <Link to="/signup" className={classes.signupLink}>here</Link></small>
           </form>
         </Grid>
         <Grid item sm />
