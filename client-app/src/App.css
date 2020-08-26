@@ -13,6 +13,14 @@ body {
 .nav-container {
   margin: auto;
 }
+.nav-container svg {
+  color: #fff;
+}
+
+.nav-container a {
+  font-size: 0;
+}
+
 a{
   text-decoration: none;
 }
