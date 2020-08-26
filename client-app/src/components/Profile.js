@@ -11,6 +11,7 @@ import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import MuiLink from '@material-ui/core/Link' 
 import Typography from '@material-ui/core/Typography';
+import Tooltip from '@material-ui/core/Tooltip';
 
 // Icon
 import LocationOn from '@material-ui/icons/LocationOn';
@@ -18,6 +19,7 @@ import LinkIcon from '@material-ui/icons/Link';
 import CalendarToday from '@material-ui/icons/CalendarToday';
 import EditIcon from '@material-ui/icons/Edit';
 import KeyboardReturn from '@material-ui/icons/KeyboardReturn';
+import SearchIcon from '@material-ui/icons/Search';
 
 
 //Redux 
@@ -38,6 +40,27 @@ const styles = (theme) => ({
         top: '80%',
         left: '70%'
       }
+    },
+    '& .profile-image-select-wrapper': {
+      background: 'rgba(0,0,0,0.3)',
+      position: 'absolute',
+      top: '0',
+      left: '50%',
+      transform: 'translateX(-50%)',
+      width: '100%',
+      height: '100%',
+      maxWidth: '200px',
+      maxHeight: '200px',
+      borderRadius: '50%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      cursor: 'pointer',
+      opacity: '0',
+      transition: 'all linear .3s',
+      '&:hover': {
+        opacity: '1',
+      },
     },
     '& .profile-image': {
       width: 200,
@@ -108,7 +131,7 @@ export class Profile extends Component {
     let profileMarkup = !loading ? (authenticated ? (
       <Paper className={classes.paper}>
         <div className={classes.profile}>
-          <div className="image-wrapper" title="test">
+          <div className="image-wrapper">
             <img src={imageUrl} alt="profile" className="profile-image" />
             <input
               type="file"
@@ -116,9 +139,11 @@ export class Profile extends Component {
               hidden="hidden"
               onChange={this.handleImageChange}
             />
-            <MyButton tip="Edit profile picture" onClick={this.handleEditPicture} btnClassName="button">
-              <EditIcon color="primary" />
-            </MyButton>
+            <Tooltip title="Edit profile picture" placement="top">
+              <div className="profile-image-select-wrapper" onClick={this.handleEditPicture} >
+                <SearchIcon color="primary" fontSize="large"/>
+              </div>
+            </Tooltip>
           </div>
           <hr />
           <div className="profile-details">
