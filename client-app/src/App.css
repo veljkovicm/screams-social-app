@@ -17,8 +17,8 @@ body {
   color: #fff;
 }
 
-.nav-container a {
-  font-size: 0;
+.nav-container .MuiIconButton-root span a {
+ font-size: 0;
 }
 
 a{
