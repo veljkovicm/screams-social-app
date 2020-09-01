@@ -24,6 +24,9 @@ exports.getAllScreams = (req, res) => {
 };
 
 exports.postOneScream = (req, res) => {
+  if(req.body.body.trim() === '') {
+    return res.status(400).json({ comment: 'Must not be empty'});
+  }
   const newScream = {
     body: req.body.body,
     userHandle: req.user.handle,
@@ -33,7 +36,6 @@ exports.postOneScream = (req, res) => {
     likeCount: 0,
     commentCount: 0,
   };
-
   db
     .collection('screams')
     .add(newScream)
