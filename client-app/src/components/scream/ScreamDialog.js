@@ -6,10 +6,11 @@ import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
 import LikeButton from './LikeButton';
 import Comments from './Comments';
+import CommentForm from './CommentForm';
 
 // Redux
 import { connect } from 'react-redux';
-import { getScream } from '../../redux/actions/dataActions';
+import { getScream, clearErrors } from '../../redux/actions/dataActions';
 
 // Material UI
 import Dialog from '@material-ui/core/Dialog';
@@ -64,6 +65,7 @@ function ScreamDialog(props) {
     classes,
     screamId,
     getScream,
+    clearErrors,
   } = props;
 
   const {
@@ -88,6 +90,7 @@ function ScreamDialog(props) {
   }
   const handleClose = () => {
     setOpen(false);
+    clearErrors();
   }
   const dialogMarkup = loading ? (
     <div className={classes.spinnerDiv}>
@@ -123,6 +126,7 @@ function ScreamDialog(props) {
         </div>
       </Grid>
       <hr className={classes.visibleSeparator} />
+      <CommentForm screamId={screamId} />
       <Comments comments={comments} />
     </Grid>
   )
@@ -155,6 +159,7 @@ ScreamDialog.propTypes = {
   scream: PropTypes.object.isRequired,
   UI: PropTypes.object.isRequired,
   getScream: PropTypes.func.isRequired,
+  clearErrors: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => ({
@@ -162,4 +167,9 @@ const mapStateToProps = (state) => ({
   scream: state.data.scream,
 });
 
-export default connect(mapStateToProps, { getScream })(withStyles(styles)(ScreamDialog));
+const mapDispatchToProps = {
+  getScream,
+  clearErrors,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(ScreamDialog));
