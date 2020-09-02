@@ -23,10 +23,6 @@ import ChatIcon from '@material-ui/icons/Chat';
 
 const styles = (theme) => ({
   ...theme.spreadThis,
-  invisibleSeparator: {
-    border: 'none',
-    margin: 4,
-  },
   profileImage: {
     maxWidth: 200,
     height: 200,
