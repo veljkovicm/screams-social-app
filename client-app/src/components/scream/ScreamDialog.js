@@ -1,6 +1,6 @@
-import React, { useEffect, useState, Component, Fragment } from 'react'
+import React, {  useState, Fragment } from 'react'
 import PropTypes from 'prop-types';
-import MyButton from '../util/MyButton';
+import MyButton from '../../util/MyButton';
 import withStyles from '@material-ui/core/styles/withStyles';
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
@@ -8,7 +8,6 @@ import LikeButton from './LikeButton';
 
 // Redux
 import { connect } from 'react-redux';
-import { getScream } from '../redux/actions/dataActions';
 
 // Material UI
 import Dialog from '@material-ui/core/Dialog';
@@ -62,7 +61,6 @@ const styles = (theme) => ({
 
 function ScreamDialog(props) {
   const {
-    getScream,
     scream,
     UI,
     classes,

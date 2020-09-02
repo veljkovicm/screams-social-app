@@ -1,6 +1,6 @@
-import React, { useEffect, useState, Component, Fragment } from 'react'
+import React, { useEffect, useState, Fragment } from 'react'
 import PropTypes from 'prop-types';
-import MyButton from '../util/MyButton';
+import MyButton from '../../util/MyButton';
 
 // MaterialUI
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -13,9 +13,8 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 // Redux
-import { postScream } from '../redux/actions/dataActions';
+import { postScream } from '../../redux/actions/dataActions';
 import { connect } from 'react-redux';
-import { DialogContentText } from '@material-ui/core';
 
 const styles = theme => ({
   ...theme.spreadThis,
