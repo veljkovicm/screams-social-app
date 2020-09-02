@@ -1,4 +1,4 @@
-import React, {  useState, Fragment } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 import PropTypes from 'prop-types';
 import MyButton from '../../util/MyButton';
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -83,6 +83,12 @@ function ScreamDialog(props) {
   } = scream;
 
   const [ open, setOpen ] = useState(false);
+
+  useEffect(() => {
+    if(props.openDialog) {
+      handleOpen();
+    }
+  }, []);
 
   const handleOpen = () => {
     getScream(screamId)

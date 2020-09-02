@@ -11,6 +11,7 @@ import { getUserData } from '../redux/actions/dataActions';
 
 function User(props) {
   const [ profile, setProfile ] = useState(null);
+  const [ screamIdParam, setScreamIdParam ] = useState(null);
   const {
     getUserData,
     data: {
@@ -20,7 +21,11 @@ function User(props) {
   } = props;
 
   useEffect(() => {
-    const handle = props.match.params.handle;
+    const { handle, screamId} = props.match.params;
+
+    if(screamId) {
+      setScreamIdParam(screamId);
+    }
     getUserData(handle);
     axios.get(`/user/${handle}`)
       .then(res => {
@@ -29,12 +34,22 @@ function User(props) {
       .catch(err => console.log(err));
   }, [])
 
+
+
   const screamsMarkup = loading ? (
     <p>Loading data...</p>
   ) : screams === null ? (
     <p>No screams from this user</p>
-  ) : (
+  ) : !screamIdParam ? (
     screams.map(scream => <Scream key={scream.screamId} scream={scream} />)
+  ) : (
+    screams.map(scream => {
+      if (scream.screamId !== screamIdParam) {
+        return <Scream key={scream.screamId} scream={scream} />;
+      } else {
+        return <Scream key={scream.screamId} scream={scream} openDialog />;
+      }
+    })
   )
   return (
     <Grid container spacing={4}>
