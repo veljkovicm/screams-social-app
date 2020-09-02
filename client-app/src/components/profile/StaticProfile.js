@@ -13,8 +13,6 @@ import Typography from '@material-ui/core/Typography';
 import LocationOn from '@material-ui/icons/LocationOn';
 import LinkIcon from '@material-ui/icons/Link';
 import CalendarToday from '@material-ui/icons/CalendarToday';
-import SearchIcon from '@material-ui/icons/Search';
-import { Portal } from '@material-ui/core';
 
 
 const styles = (theme) => ({
