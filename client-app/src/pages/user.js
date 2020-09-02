@@ -32,7 +32,7 @@ function User(props) {
         setProfile(res.data.user);
       })
       .catch(err => console.log(err));
-  }, [])
+  }, [ getUserData, props.match.params ])
 
 
 
