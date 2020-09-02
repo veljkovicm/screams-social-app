@@ -65,6 +65,7 @@ function ScreamDialog(props) {
     classes,
     screamId,
     getScream,
+    userHandle,
     clearErrors,
   } = props;
 
@@ -78,23 +79,33 @@ function ScreamDialog(props) {
     likeCount,
     commentCount,
     userImage,
-    userHandle,
     comments,
   } = scream;
 
   const [ open, setOpen ] = useState(false);
+  const [ oldPath, setOldPath ] = useState('');
+  const [ newPath, setNewPath ] = useState('');
 
   useEffect(() => {
+    setOldPath(window.location.pathname);
+    setNewPath(`/users/${userHandle}/scream/${screamId}`)
     if(props.openDialog) {
       handleOpen();
     }
   }, []);
 
   const handleOpen = () => {
+    window.history.pushState(null, null, newPath);
+
+    if(oldPath === newPath) {
+      setOldPath(`/users/${userHandle}`);
+    }
+
     getScream(screamId)
     setOpen(true);
   }
   const handleClose = () => {
+    window.history.pushState(null, null, oldPath);
     setOpen(false);
     clearErrors();
   }
