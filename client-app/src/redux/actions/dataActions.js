@@ -18,8 +18,6 @@ export const getScreams = () => (dispatch) => {
   dispatch({ type: LOADING_DATA });
   axios.get('/screams')
     .then(res => {
-
-      console.log('res', res);
       dispatch({
         type: SET_SCREAMS,
         payload: res.data

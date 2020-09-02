@@ -59,7 +59,6 @@ class Scream extends Component {
         }
       }
     } = this.props;
-    console.log('SCREAM PROPS', this.props);
     const deleteButton = authenticated && userHandle === handle ? (
       <DeleteScream screamId={screamId} />
     ) : null;
