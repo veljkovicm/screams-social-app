@@ -37,5 +37,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://europe-west1-screams-social-app.cloudfunctions.net/api"
+  "proxy": "https://europe-west1-screams-social-app.cloudfunctions.net/api",
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  }
 }
