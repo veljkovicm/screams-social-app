@@ -25,7 +25,7 @@ import UnfoldMore from '@material-ui/icons/UnfoldMore';
 import ChatIcon from '@material-ui/icons/Chat';
 
 const styles = (theme) => ({
-  ...theme.spreadThis,
+  ...theme.styles,
   profileImage: {
     maxWidth: 200,
     height: 200,

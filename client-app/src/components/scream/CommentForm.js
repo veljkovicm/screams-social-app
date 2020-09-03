@@ -13,7 +13,7 @@ import TextField from '@material-ui/core/TextField';
 
 
 const styles = (theme) => ({
-  ...theme.spreadThis,
+  ...theme.styles,
   button: {
     margin: '20px 0 10px',
   }

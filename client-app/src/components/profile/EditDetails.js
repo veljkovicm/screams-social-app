@@ -22,7 +22,7 @@ import EditIcon from '@material-ui/icons/Edit';
 
 
 const styles = (theme) => ({
-  ...theme.spreadThis,
+  ...theme.styles,
   button: {
     float: 'right'
   }

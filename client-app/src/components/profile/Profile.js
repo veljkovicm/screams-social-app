@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import dayjs from 'dayjs';
 import EditDetails from './EditDetails';
 import MyButton from '../../util/MyButton';
+import ProfileSkeleton from '../../util/ProfileSkeleton';
 
 // MaterialUI
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -27,72 +28,7 @@ import { logoutUser, uploadImage } from '../../redux/actions/userActions';
 
 
 const styles = (theme) => ({
-  paper: {
-    padding: 20
-  },
-  profile: {
-    '& .image-wrapper': {
-      textAlign: 'center',
-      position: 'relative',
-      '& button': {
-        position: 'absolute',
-        top: '80%',
-        left: '70%'
-      }
-    },
-    '& .profile-image-select-wrapper': {
-      background: 'rgba(0,0,0,0.3)',
-      position: 'absolute',
-      top: '0',
-      left: '50%',
-      transform: 'translateX(-50%)',
-      width: '100%',
-      height: '100%',
-      maxWidth: '200px',
-      maxHeight: '200px',
-      borderRadius: '50%',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      cursor: 'pointer',
-      opacity: '0',
-      transition: 'all linear .3s',
-      '&:hover': {
-        opacity: '1',
-      },
-    },
-    '& .profile-image': {
-      width: 200,
-      height: 200,
-      objectFit: 'cover',
-      maxWidth: '100%',
-      borderRadius: '50%'
-    },
-    '& .profile-details': {
-      textAlign: 'center',
-      '& span, svg': {
-        verticalAlign: 'middle'
-      },
-      '& a': {
-        color: theme.palette.primary.main
-      }
-    },
-    '& hr': {
-      border: 'none',
-      margin: '0 0 10px 0'
-    },
-    '& svg.button': {
-      '&:hover': {
-        cursor: 'pointer'
-      }
-    }
-  },
-  buttons: {
-    textAlign: 'center',
-    '& a': {
-      margin: '20px 10px'
-    }
-  }
+  ...theme.styles,
 });
 
 export class Profile extends Component {
@@ -200,7 +136,7 @@ export class Profile extends Component {
           </Button>
         </div>
       </Paper>
-    )) : (<p>Loading...</p>)
+    )) : (<ProfileSkeleton />)
 
     return profileMarkup; 
   }
