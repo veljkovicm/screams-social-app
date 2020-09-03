@@ -111,7 +111,7 @@ const Notifications = (props) => {
 
 Notifications.propTypes = {
   markNotificationsRead: PropTypes.func.isRequired,
-  notifications: PropTypes.object.isRequired,
+  notifications: PropTypes.array.isRequired,
 }
 
 const mapStateToProps = (state) => ({
