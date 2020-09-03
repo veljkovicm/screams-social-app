@@ -1,5 +1,6 @@
 const config = require('./firebase-api');
 const functions = require('firebase-functions');
+const cors = require('cors');
 
 const app = require('express')();
 
@@ -25,6 +26,8 @@ const {
   getUserDetails,
   markNotificationsRead,
 } = require('./handlers/users');
+
+app.use(cors({ origin: true }));
 
 // Scream routes
 app.get('/screams', getAllScreams);
