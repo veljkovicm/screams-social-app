@@ -25,6 +25,9 @@ import User from './pages/user';
 
 const theme = createMuiTheme(themeFile);
 
+// Only for dev env
+axios.defaults.baseURL = 'https://europe-west1-screams-social-app.cloudfunctions.net/api';
+
 const token = localStorage.FBIdToken;
 if(token) {
   const decodedToken = jwtDecode(token);
